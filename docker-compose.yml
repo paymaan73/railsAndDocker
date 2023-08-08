@@ -1,0 +1,46 @@
+services:
+
+  db:
+    image: postgres:14.2-alpine
+    container_name: myapplication-postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: "postgres -c 'max_connections=500'"
+    expose:
+      - 5432
+    environment:
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ILoveDoingKnowBe4Training!
+
+  appplication:
+    build: .
+    command: "rails db:migrate"
+    command: "rails s -b 0.0.0.0"
+    depends_on:
+      - db
+      - sidekiq
+    ports:
+      - "8080:3000"
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    expose:
+      - 6379
+    volumes:
+      - redis:/data
+
+
+  sidekiq:
+    build: .
+    command: "bundle exec sidekiq"
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+
+volumes:
+  postgres_data:
+  redis:
