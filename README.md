@@ -1,24 +1,32 @@
-# README
+##### Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The setups steps expect following tools installed on the system.
 
-Things you may want to cover:
+- Github
+- Ruby [3.1.2](https://github.com/organization/project-name/blob/master/.ruby-version#L1)
+- Rails [7.0.6](https://github.com/organization/project-name/blob/master/Gemfile#L12)
 
-* Ruby version
+##### 1. Check out the repository
 
-* System dependencies
+```bash
+git clone git@github.com:paymaan73/railsAndDocker.git
+```
 
-* Configuration
+##### 2. Create database.yml file
 
-* Database creation
+Copy the sample database.yml file and edit the database configuration as required.
 
-* Database initialization
+```bash
+docker compose build
+docker compose up
+```
 
-* How to run the test suite
+##### 3. Create and setup the database
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the following commands to create and setup the database.
 
-* Deployment instructions
+```
+docker exec -it my_application rails db:migrate
+```
 
-* ...
+And now you can visit the site with the URL http://localhost:8080
