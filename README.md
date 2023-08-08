@@ -12,7 +12,7 @@ The setups steps expect following tools installed on the system.
 git clone git@github.com:paymaan73/railsAndDocker.git
 ```
 
-##### 2. Create database.yml file
+##### 2. Build docker compose file
 
 Copy the sample database.yml file and edit the database configuration as required.
 
